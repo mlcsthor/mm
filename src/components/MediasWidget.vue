@@ -61,6 +61,7 @@
                         <li v-else><a v-on:click.prevent="mmc.selectFile(contextMenuFile)" href="#"><i class="fa fa-fw fa-check"></i> Select</a></li>
                         <li><a v-on:click.prevent="mmc.toggleDetailsOn(contextMenuFile)" href="#"><i class="fa fa-fw fa-info-circle"></i> Details</a></li>
                         <li><a v-bind:href="$api.downloadUrl(contextMenuFile)"><i class="fa fa-fw fa-download"></i> Download</a></li>
+                        <li><a @click="deleteFile(contextMenuFile)"><!--v-bind:href="$api.deleteFile(contextMenuFile)"--><i class="fa fa-fw fa-download"></i> Delete</a></li>
                     </ul>
                 </div>
             </transition>
@@ -120,6 +121,10 @@ export default {
         this.refresh();
     },
     methods: {
+        deleteFile(file) {
+          this.$api.deleteFile(file)
+          this.refresh()
+        },
         refresh() {
             this.loading = true;
             this.error = false;

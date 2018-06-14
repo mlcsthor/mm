@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  media-manager:
+    image: node
+    working_dir: /home/node/app
+    command: node ./node_modules/webpack/bin/webpack.js --progress --hide-modules
+    ports:
+      - "8080:8080"
+    volumes:
+      - $PWD:/home/node/app
+
+networks:
+  default:
+    external:
+      name: nginx-proxy

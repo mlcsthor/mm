@@ -8,6 +8,7 @@ export default class Api {
             listUrl: null,
             downloadUrl: null,
             uploadUrl: null,
+            deleteUrl: null,
             axiosOptions: {}
         };
     }
@@ -23,11 +24,20 @@ export default class Api {
     }
 
     list(path) {
-        return this.axios.get(this.options.listUrl, { params: { path: this.path } });
+        return this.axios.get(this.options.listUrl, { params: { path: path } });
     }
 
     upload(data, config) {
         return this.axios.post(this.options.uploadUrl, data, config);
+    }
+
+    deleteFile(file) {
+        let formData = new FormData()
+        formData.append('path', file.path)
+
+        if (this.options.deleteUrl)
+
+            return this.axios.post(this.options.deleteUrl, formData)
     }
 
     downloadUrl(file) {
